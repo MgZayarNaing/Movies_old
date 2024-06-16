@@ -18,17 +18,19 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, email, usercode, name, password=None):
         user = self.create_user(email, usercode, name, password)
         user.is_admin = True
+        user.is_approved = True  
         user.save(using=self._db)
         return user
 
 class CustomUser(AbstractBaseUser):
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, primary_key=True)
     name = models.CharField(max_length=255)
     usercode = models.CharField(max_length=255, unique=True)
     email = models.EmailField(max_length=255, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default=False)
     
     objects = CustomUserManager()
 
