@@ -1,4 +1,3 @@
-# Correct the import statement by specifying the correct path
 from api.serializers import *
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
