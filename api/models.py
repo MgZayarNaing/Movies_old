@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.conf import settings
-
+from django.contrib.auth import get_user_model
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -29,4 +29,5 @@ class VideoComment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Comment by {self.user.username} on {self.video.name}"
+        User = get_user_model()
+        return f"Comment by {self.user.email} on {self.video.name}"

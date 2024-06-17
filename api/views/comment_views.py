@@ -1,6 +1,7 @@
 from .imports import *
 from rest_framework.permissions import IsAuthenticated
 
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def comment_list(request):
